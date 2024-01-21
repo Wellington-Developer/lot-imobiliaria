@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineVerified } from "react-icons/md";
@@ -9,12 +9,12 @@ import { FaArrowRight, FaArrowLeft, FaChartArea, FaInfoCircle, FaWhatsapp } from
 import { FaXmark } from "react-icons/fa6";
 import { GoHomeFill } from "react-icons/go";
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
-
+import './style.css';
 export const PostPage = () => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'YOUR_API_KEY_HERE', // Substitua pelo seu próprio chave da API do Google Maps
+    googleMapsApiKey: 'AIzaSyAArItYyvL1J4Ggx0HjpGqOorWCgY07cRk', 
   });
 
   const container = useRef();
@@ -74,12 +74,12 @@ export const PostPage = () => {
   });
 
   useEffect(() => {
-    if (isLoaded && !googleMapsLoaded) {
+    if (isLoaded && !googleMapsLoaded && data.localidade && data.cidade && data.bairro) {
       setGoogleMapsLoaded(true);
       const geocoder = new window.google.maps.Geocoder();
       const address = `${data.localidade}, ${data.cidade}, ${data.bairro}`;
       geocoder.geocode({ address }, (results, status) => {
-        if (status === "OK") {
+        if (status === "OK" && results.length > 0) {
           setLocation({
             lat: results[0].geometry.location.lat(),
             lng: results[0].geometry.location.lng(),
@@ -89,8 +89,7 @@ export const PostPage = () => {
         }
       });
     }
-  }, [isLoaded, data, googleMapsLoaded]);
-  
+  }, [isLoaded, data, googleMapsLoaded]);  
 
   return (
     data ? 
