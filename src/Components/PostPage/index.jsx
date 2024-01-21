@@ -1,47 +1,42 @@
-// Styles
-import './style.css';
-
-// React Hooks
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
-// React Icons
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineVerified } from "react-icons/md";
 import { UserContext } from '../../UserContext';
-import { ButtonForm } from '../Forms/Button'
+import { ButtonForm } from '../Forms/Button';
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaArrowLeft, FaChartArea, FaInfoCircle, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft, FaChartArea, FaInfoCircle, FaWhatsapp } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { GoHomeFill } from "react-icons/go";
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
 export const PostPage = () => {
+  const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyAArItYyvL1J4Ggx0HjpGqOorWCgY07cRk'
-  })
-  const container = useRef()
+    googleMapsApiKey: 'YOUR_API_KEY_HERE', // Substitua pelo seu próprio chave da API do Google Maps
+  });
+
+  const container = useRef();
   const { id } = useParams();
-  const [ data, setData ] = useState([])
-  const [ modal, setModal ] = useState(false)
+  const [data, setData] = useState([]);
+  const [modal, setModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const user = useContext(UserContext)
-  const [ widthImages, setWidthImages ] = useState(0)
-  const [ limiteLines, setLimiteLines ] = useState(false)
+  const user = useContext(UserContext);
+  const [widthImages, setWidthImages] = useState(0);
+  const [limiteLines, setLimiteLines] = useState(false);
 
   const handleThumbnailClick = (thumbnail) => {
     setSelectedImage(thumbnail);
   };
 
   const handleModal = () => {
-    setModal(!modal)
-  }
+    setModal(!modal);
+  };
 
   const fetchData = async () => {
     try {
       const response = await fetch(`https://huergo.com.br/lot-api/json/api/photo/${id}`);
-      
       if (response.ok) {
         const json = await response.json();
         setData(json.photo);
@@ -51,50 +46,50 @@ export const PostPage = () => {
     } catch (error) {
       console.error('Erro ao processar a solicitação:', error);
     }
-  }
+  };
 
   const scrollLeft = () => {
-    // Lógica para rolar para a esquerda (100px)
     container.current.scrollLeft -= 100;
   };
 
   const scrollRight = () => {
-    // Lógica para rolar para a direita (100px)
     container.current.scrollLeft += 100;
   };
 
   useEffect(() => {
-    fetchData()
-  }, [])
-  
+    fetchData();
+  }, []);
+
   useEffect(() => {
     const updateWidth = () => {
       setWidthImages(container.current?.scrollWidth - container.current?.offsetWidth);
     };
-    
+
     updateWidth();
-  }, [data])
+  }, [data]);
 
   const [location, setLocation] = useState({
     lat: 0,
     lng: 0,
   });
-  
+
   useEffect(() => {
-    const geocoder = new window.google.maps.Geocoder();
-    const address = `${data.localidade}, ${data.cidade}, ${data.bairro}`;
-    
-    geocoder.geocode({ address }, (results, status) => {
-      if (status === "OK") {
-        setLocation({
-          lat: results[0].geometry.location.lat(),
-          lng: results[0].geometry.location.lng(),
-        });
-      } else {
-        console.error('Erro ao geocodificar endereço:', status);
-      }
-    });
-  }, [data]);
+    if (isLoaded && !googleMapsLoaded) {
+      setGoogleMapsLoaded(true);
+      const geocoder = new window.google.maps.Geocoder();
+      const address = `${data.localidade}, ${data.cidade}, ${data.bairro}`;
+      geocoder.geocode({ address }, (results, status) => {
+        if (status === "OK") {
+          setLocation({
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng(),
+          });
+        } else {
+          console.error('Erro ao geocodificar endereço:', status);
+        }
+      });
+    }
+  }, [isLoaded, data, googleMapsLoaded]);
   
 
   return (
