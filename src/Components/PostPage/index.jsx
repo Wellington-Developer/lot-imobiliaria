@@ -83,15 +83,19 @@ export const PostPage = () => {
   useEffect(() => {
     const geocoder = new window.google.maps.Geocoder();
     const address = `${data.localidade}, ${data.cidade}, ${data.bairro}`;
+    
     geocoder.geocode({ address }, (results, status) => {
       if (status === "OK") {
         setLocation({
           lat: results[0].geometry.location.lat(),
           lng: results[0].geometry.location.lng(),
         });
+      } else {
+        console.error('Erro ao geocodificar endereço:', status);
       }
     });
   }, [data]);
+  
 
   return (
     data ? 
