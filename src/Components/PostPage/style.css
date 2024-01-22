@@ -84,6 +84,12 @@ h3 {
   gap: 24px;
 }
 
+.cnt {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .post-page__intro {
   display: flex;
   gap: 30px;

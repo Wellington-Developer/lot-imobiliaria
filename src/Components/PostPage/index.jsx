@@ -260,9 +260,12 @@ export const PostPage = () => {
 
             <div className="contact-locale">
               <h1>Fale com a gente</h1>
-              <a href="https://wa.me/5541995143839" target='_blank'>
+              <div className="cnt">
+                <a href="https://wa.me/5541995143839" target='_blank'>
                 <FaWhatsapp />
               </a>
+              <p>(41) 99514-3839</p>
+              </div>
             </div>
           </div>
 
