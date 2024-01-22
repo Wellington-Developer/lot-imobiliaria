@@ -16,6 +16,14 @@ export const Post = ({ item } ) => {
         item &&
         <div className="post-section__container">
           <div className="img-post">
+            {
+              item.status_do_imovel == "Locado" ?
+              (<h1 id="locked">Locado</h1>) : (<p></p>)
+            }
+            {
+              item.status_do_imovel == "Vendido" ?
+              (<h1 id="locked">Vendido</h1>) : (<p></p>)
+            }
             <img src={item.imagens_relacionadas[0]} alt="img" />
           </div>
           

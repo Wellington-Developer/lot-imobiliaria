@@ -31,10 +31,8 @@ export const Post = () => {
   const { data, error, loading, request } = useFetch()
   const navigate = useNavigate();
   const [tipo, setTipo] = useState('');
-  const [status, setStatus] = useState('');
   const [locacaoOuVenda, setLocacaoOuVenda] = useState('');
   const tipos = ['Apartamento', 'Casa', 'Sobrado', 'Kitnet', 'Chalé', 'Loft', 'Duplex', 'Triplex', 'Flat', 'Cobertura'];
-  const statusOptions = ['Vendido', 'Disponivel'];
   const locacaOuVenda = ['Locacao', 'Venda'];
   const { filterPosts } = useContext(UserContext)
 
@@ -48,7 +46,7 @@ export const Post = () => {
     formData.append('cidade', cidade.value);
     formData.append('bairro', bairro.value);
     formData.append('tipo', tipo);
-    formData.append('status_do_imovel', status);
+    formData.append('status_do_imovel', status_do_imovel.value);
     formData.append('locacao_ou_venda', locacaoOuVenda);
     formData.append('preco', preco.value);
     formData.append('titulo', titulo.value);
@@ -123,14 +121,6 @@ export const Post = () => {
           {tipos.map((type) => (
             <option key={type} value={type}>
               {type}
-            </option>
-          ))}
-        </select>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="">Selecione o status</option>
-          {statusOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
             </option>
           ))}
         </select>

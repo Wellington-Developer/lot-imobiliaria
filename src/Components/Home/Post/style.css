@@ -24,6 +24,16 @@
   padding: 0 20px;
 }
 
+#locked {
+  position: absolute;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin: 12px;
+  background: #70ff8b;
+  font-weight: bold;
+}
+
 .post-info__section .topside-info__post h1 {
   font-size: 20px;
   font-weight: semi-bold;

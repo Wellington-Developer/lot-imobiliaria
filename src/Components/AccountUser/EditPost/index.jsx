@@ -34,10 +34,8 @@ export const EditPost = () => {
   const { error, loading, request } = useFetch();
   const navigate = useNavigate();
   const [tipo, setTipo] = useState('');
-  const [status, setStatus] = useState('');
   const [locacaoOuVenda, setLocacaoOuVenda] = useState('');
   const tipos = ['Apartamento', 'Casa', 'Sobrado', 'Kitnet', 'Chalé', 'Loft', 'Duplex', 'Triplex', 'Flat', 'Cobertura'];
-  const statusOptions = ['Vendido', 'Disponivel'];
   const locacaoOuVendaOptions = ['Locacao', 'Venda'];
 
   const handleSubmit = async (e) => {
@@ -46,7 +44,7 @@ export const EditPost = () => {
     formData.append('cidade', cidade.value);
     formData.append('bairro', bairro.value);
     formData.append('tipo', tipo);
-    formData.append('status_do_imovel', status);
+    formData.append('status_do_imovel', status_do_imovel.value);
     formData.append('locacao_ou_venda', locacaoOuVenda);
     formData.append('preco', preco.value);
     formData.append('titulo', titulo.value);
@@ -93,7 +91,6 @@ export const EditPost = () => {
       const filteredPost = posts.find(post => post.id == id);
       
       if (filteredPost) {
-        console.log(filteredPost)
         status_do_imovel.setValue(filteredPost.status_do_imovel);
         preco.setValue(filteredPost.preco);
         titulo.setValue(filteredPost.title);
@@ -116,7 +113,6 @@ export const EditPost = () => {
         setTextoAdicional(filteredPost.texto_adicional ? filteredPost.texto_adicional : []);
   
         setTipo(filteredPost.tipo);
-        setStatus(filteredPost.status);
         setLocacaoOuVenda(filteredPost.locacao_ou_venda);
       }
     }
@@ -164,14 +160,6 @@ export const EditPost = () => {
           {tipos.map((type) => (
             <option key={type} value={type}>
               {type}
-            </option>
-          ))}
-        </select>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="">Selecione o status</option>
-          {statusOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
             </option>
           ))}
         </select>
