@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../UserContext'
 
 export const Post = () => {
-  const nome = useForm();
   const status_do_imovel = useForm();
   const preco = useForm();
   const titulo = useForm();
@@ -46,7 +45,6 @@ export const Post = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('nome', nome.value);
     formData.append('cidade', cidade.value);
     formData.append('bairro', bairro.value);
     formData.append('tipo', tipo);
@@ -90,10 +88,9 @@ export const Post = () => {
   return (
     <div className="animeLeft container-form__post">
       <form onSubmit={handleSubmit}>
-        <Input label="Nome" name="nome" type="text" {...nome}/>
+        <Input label="Titulo" name="titulo" type="text" {...titulo}/>
         <Input label="Status do imóvel" name="status_do_imovel" type="text" {...status_do_imovel}/>
         <Input label="Preço" name="preco" type="number" {...preco}/>
-        <Input label="Titulo" name="titulo" type="text" {...titulo}/>
         <Input label="Localidade" name="localidade" type="text" {...localidade}/>
         <Input label="Breve descricão" name="breve_descricao" type="text" {...breve_descricao}/>
         <Input

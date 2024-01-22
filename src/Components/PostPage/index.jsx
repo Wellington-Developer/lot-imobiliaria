@@ -164,6 +164,9 @@ export const PostPage = () => {
               <div className="modal-inner">
               <FaXmark onClick={handleModal} />
               <h1>{data.informacao_adicional_titulo}</h1>
+              {
+                console.log(data)
+              }
               <p>{data.informacao_adicional_paragrafo}</p>
               </div>
             </div>
