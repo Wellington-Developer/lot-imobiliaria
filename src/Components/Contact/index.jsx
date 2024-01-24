@@ -6,6 +6,18 @@ import { MdEmail } from "react-icons/md";
 
 
 export const Contact = () => {
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+    
+        const name = event.target.elements.name.value;
+        const email = event.target.elements.email.value;
+        const mensagem = event.target.elements.mensagem.value;
+    
+        const mailtoLink = `mailto:documentos@lotimobiliaria.com.br?subject=Contato&body=Nome: ${name}%0AEmail: ${email}%0AMensagem: ${mensagem}`;
+    
+        window.location.href = mailtoLink;
+    };
+
     return (
         <div>
             <Banner text="Contato" img="https://huergo.com.br/lot/wp-content/uploads/2023/08/contato.jpg"/>
@@ -30,13 +42,13 @@ export const Contact = () => {
                     </div>
                 </div>
                 <div className="right-side__banner">
-                    <h1>Entre em contato conosco</h1>
-                    <form>
-                        <Input name="name" label="Seu nome" type="text" />
-                        <Input name="email" label="Email" type="email" />
-                        <Input name="mensagem" label="Mensagem" type="textarea" />
-                        <ButtonForm inner="Enviar"/>
-                    </form>
+                <h1>Entre em contato conosco</h1>
+                <form onSubmit={handleFormSubmit}>
+                    <Input name="name" label="Seu nome" type="text" />
+                    <Input name="email" label="Email" type="email" />
+                    <Input name="mensagem" label="Mensagem" type="textarea" />
+                    <ButtonForm inner="Enviar" type="submit" />
+                </form>
                 </div>
             </div>
         </div>
