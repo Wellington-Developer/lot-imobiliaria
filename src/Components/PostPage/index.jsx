@@ -129,7 +129,7 @@ export const PostPage = () => {
           </div>
           <div className="post-right__intro">
             {
-              (user.data && data.author) && (data.author == user.data.username) ?
+              (user.data && data.author) && (data.author == user.data.username || user.data.username == "admin" ) ?
               (
                 <Link to={`/account/edit-post/${id}`}>
                   <ButtonForm inner="Editar post" style={{ 'marginBottom': 30 }}/>
