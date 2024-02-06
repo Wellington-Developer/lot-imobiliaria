@@ -2,7 +2,7 @@
 import './App.css';
 
 // React Router Dom
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter , Route, Routes } from 'react-router-dom';
 
 // React Components
 import { Home } from './Components/Home';
@@ -28,7 +28,7 @@ import { Documentation } from './Components/Documentation';
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter >
         <UserStorage>
           <Header />
           <Routes>
@@ -46,7 +46,7 @@ const App = () => {
           <Footer />
           <GoToTop />
         </UserStorage>
-      </BrowserRouter>
+      </HashRouter >
     </div>
   );
 }
