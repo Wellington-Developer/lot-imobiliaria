@@ -73,6 +73,20 @@ h3 {
   display: flex;
 }
 
+.zoom-container {
+  max-width: 600px; /* Defina o tamanho máximo do contêiner conforme necessário */
+  overflow: hidden; /* Garante que a imagem não ultrapasse o contêiner */
+  cursor: pointer;
+}
+
+.zoom-container img {
+  transition: transform 0.3s ease-in-out; /* Adiciona uma transição suave para o efeito de zoom */
+}
+
+.zoom-container img:hover {
+  transform: scale(1.2); /* Ajuste o valor de escala conforme necessário para o efeito de zoom desejado */
+}
+
 .scroll-button:hover,
 .scroll-button:focus {
   outline: none;

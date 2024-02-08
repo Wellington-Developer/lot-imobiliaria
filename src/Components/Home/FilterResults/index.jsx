@@ -6,16 +6,17 @@ import { motion } from "framer-motion";
 import { Post } from "../Post";
 
 export const FilterResults = () => {
-  const { filteredPosts } = useContext(UserContext);
+  const { filteredPosts, setTypeFilter } = useContext(UserContext);
   const [widthPesquisa, setWidthPesquisa] = useState(0);
   const carouselRef = useRef();
 
   const updateWidth = () => {
     setWidthPesquisa(carouselRef.current?.scrollWidth - carouselRef.current?.offsetWidth);
   }
-
+  
   useEffect(() => {
     updateWidth()
+    
   }, [filteredPosts])
 
   return (
@@ -32,6 +33,9 @@ export const FilterResults = () => {
             <div className="info-posts__drag">
               <h1 className="title">
                 <div>
+                  {
+                    filteredPosts && filteredPosts.length >= 1 ? setTypeFilter(filteredPosts[0].locacao_ou_venda) : ''
+                  }
                   <h1>Resultado: {filteredPosts[0].locacao_ou_venda === 'Locacao' ? 'Locação' : 'Venda'}</h1>
                 </div>
               </h1>

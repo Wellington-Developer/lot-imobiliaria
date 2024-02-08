@@ -11,6 +11,16 @@ import { GoHomeFill } from "react-icons/go";
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import './style.css';
 export const PostPage = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -56,6 +66,10 @@ export const PostPage = () => {
     container.current.scrollLeft += 100;
   };
 
+  const handleScrollDown = () => {
+    window.scrollBy(0, 1500);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -97,11 +111,17 @@ export const PostPage = () => {
       <div className="post-page__container">
         <div className="post-page__intro container">
           <div className="post-left__intro animeLeft">
-            {
+            <div
+                className={`zoom-container ${isHovered ? 'zoomed' : ''}`}
+            >
+              {
                 selectedImage ? 
-                (<img key={selectedImage} src={selectedImage} alt={`Imagem Grande`} />) :
-                (data.imagens_relacionadas && <img src={data.imagens_relacionadas[0]} />)
-            }
+                (<img key={selectedImage} src={selectedImage} alt={`Imagem Grande`} onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}/>) :
+                (data.imagens_relacionadas && <img src={data.imagens_relacionadas[0]} onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}/>)
+              }
+            </div>
             <motion.div ref={container} className="thumbnails-container"
             whileTap={{ cursor: "grabbing" }}>
               <motion.div className="posts-wrapper" drag="x" dragConstraints={{ right: 0, left: -widthImages }}>
@@ -192,7 +212,7 @@ export const PostPage = () => {
             <p className="post-locale">
               <FiMapPin />{data.localidade}</p>
             <p className="post-description">{data.descricao_completa}</p>
-            <a href="#features" className="button">MAIS INFORMAÇÕES
+            <a onClick={handleScrollDown} className="button">MAIS INFORMAÇÕES
             </a>
           </div>  
         </div>

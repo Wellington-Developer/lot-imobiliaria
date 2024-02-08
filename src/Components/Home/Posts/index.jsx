@@ -14,7 +14,7 @@ export const Posts = ({ type }) => {
   const [widthVenda, setWidthVenda] = useState(0);
   const carouselLocacao = useRef();
   const carouselVenda = useRef();
-  const { filteredPosts } = useContext(UserContext);
+  const { filteredPosts, typeFilter } = useContext(UserContext);
 
   const fetchData = async () => {
     try {
@@ -64,7 +64,8 @@ export const Posts = ({ type }) => {
         <FilterResults />
       }
       {
-        <div className="posts-section__container">
+        typeFilter == "Locacao" ? "" :
+        (<div className="posts-section__container">
           <div className="info-posts__drag">
             <h1 className="title">{dataLocacao && dataLocacao.length > 0 && 'Locação'}</h1>
             <FiArrowRight />
@@ -82,11 +83,13 @@ export const Posts = ({ type }) => {
                 ))}
               </motion.div>
             </motion.div>
-        </div>
+        </div>)
       }
 
       {
-        <div className="posts-section__container">
+        typeFilter == "Venda" ? "" :
+
+        (<div className="posts-section__container">
           <div className="info-posts__drag">
             <h1 className="title">{dataVenda && dataVenda.length > 0 && 'Venda'}</h1>
             <FiArrowRight />
@@ -104,7 +107,7 @@ export const Posts = ({ type }) => {
                 ))}
               </motion.div>
             </motion.div>
-        </div>
+        </div>)
       }
     </div>
   );

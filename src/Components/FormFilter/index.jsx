@@ -47,6 +47,10 @@ export const FormFilter = () => {
     }
   };
 
+  const handleScrollDown = () => {
+    window.scrollBy(0, 500);
+  };
+
   useEffect(() => {
     filterData();
   }, [posts]);
@@ -103,7 +107,7 @@ export const FormFilter = () => {
                   </option>
                 ))}
               </select>
-              <a href="#posts">Visualizar</a>
+              <a onClick={handleScrollDown}>Visualizar</a>
             </form>
           </div>
         </div>

@@ -7,6 +7,8 @@ export const Home = () => {
   return (
     <div>
       <FormFilter />
+      <div id="posts">
+      </div>
     <div className="homepage-section__container container" id="posts">
       <Posts type={'Locação'}/>
     </div>

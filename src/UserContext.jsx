@@ -10,6 +10,7 @@ export const UserStorage = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [posts, setPosts] = useState(null);
+  const [typeFilter, setTypeFilter] = useState('')
   const [filteredPosts, setFilteredPosts] = useState(null); // Novo estado para os posts filtrados
   const navigate = useNavigate();
 
@@ -111,10 +112,11 @@ export const UserStorage = ({ children }) => {
   useEffect(() => {
     validateUser();
     getAllPosts();
+
   }, []);
 
   return (
-    <UserContext.Provider value={{ userLogin, data, login, logoutUser, error, loading, filterPosts, posts, filteredPosts }}>
+    <UserContext.Provider value={{ userLogin, data, login, logoutUser, error, loading, filterPosts, posts, filteredPosts, typeFilter, setTypeFilter }}>
       {children}
     </UserContext.Provider>
   );
