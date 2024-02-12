@@ -35,7 +35,7 @@ export const EditPost = () => {
   const navigate = useNavigate();
   const [tipo, setTipo] = useState('');
   const [locacaoOuVenda, setLocacaoOuVenda] = useState('');
-  const tipos = ['Apartamento', 'Casa', 'Sobrado', 'Kitnet', 'Chalé', 'Loft', 'Duplex', 'Triplex', 'Flat', 'Cobertura'];
+  const tipos = ['Apartamento', 'Casa', 'Sobrado', 'Kitnet', 'Chalé', 'Loft', 'Duplex', 'Triplex', 'Flat', 'Cobertura', 'Terreno'];
   const locacaoOuVendaOptions = ['Locacao', 'Venda'];
 
   const handleSubmit = async (e) => {
