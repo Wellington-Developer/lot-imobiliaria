@@ -5,6 +5,7 @@
   height: 100%;
   flex-shrink: 0;
   min-width: 360px;
+  overflow: hidden;
 }
 
 .post-section__container .img-post {
@@ -20,19 +21,27 @@
   pointer-events: none;
 }
 
-.topside-info__post {
-  padding: 0 20px;
-}
-
 #locked {
-  position: absolute;
+  margin: 0 auto;
+  position: relative;
+  top: -300px;
+  z-index: 9;
   font-size: 1rem;
-  padding: 4px 8px;
+  max-width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 5px;
   margin: 12px;
   background: #70ff8b;
   font-weight: bold;
 }
+
+.topside-info__post {
+  padding: 0 20px;
+}
+
 
 .post-info__section .topside-info__post h1 {
   font-size: 20px;

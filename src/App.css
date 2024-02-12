@@ -55,6 +55,7 @@ p {
   max-width: 1098px;
   width: 100%;
   margin: 0 auto;
+  z-index: 9999;
 }
 
 @media screen and (max-width: 1120px) {

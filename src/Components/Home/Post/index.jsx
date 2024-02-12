@@ -16,6 +16,10 @@ export const Post = ({ item } ) => {
         item &&
         <div className="post-section__container">
           <div className="img-post">
+            <img src={item.imagens_relacionadas[0]} alt="img" />
+          </div>
+          
+          <div className="post-info__section">
             {
               item.status_do_imovel == "Locado" ?
               (<h1 id="locked">Locado</h1>) : (<p></p>)
@@ -24,10 +28,6 @@ export const Post = ({ item } ) => {
               item.status_do_imovel == "Vendido" ?
               (<h1 id="locked">Vendido</h1>) : (<p></p>)
             }
-            <img src={item.imagens_relacionadas[0]} alt="img" />
-          </div>
-          
-          <div className="post-info__section">
             <div className="topside-info__post">
               <h1>{item.breve_descricao}</h1>
               <p>{item.cidade} - {item.bairro}</p>
